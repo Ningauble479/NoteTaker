@@ -4,7 +4,7 @@ import axios from 'axios';
 const NotesContext = createContext();
 
 export const NotesProvider = ({ children }) => {
-    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
+    const backendUrl = process.env.TEMPORARY_VERCEL_URL || process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
 
     const [notes, setNotes] = useState([]);
     const [searchQueries, setSearchQueries] = useState({

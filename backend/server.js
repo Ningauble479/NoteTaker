@@ -10,7 +10,7 @@ const notesFilePath = path.join(__dirname, 'notes.json');
 
 // Configure CORS
 const corsOptions = {
-    origin: ['https://super-duper-parakeet-4w9p6vr9vpwc594-3000.app.github.dev', 'https://note-taker-1bf8v01ri-ningauble479s-projects.vercel.app'],// Your frontend origin
+    origin: ['https://super-duper-parakeet-4w9p6vr9vpwc594-3000.app.github.dev', process.env.TEMPORARY_VERCEL_URL ],// Your frontend origin
     optionsSuccessStatus: 200,
     methods: ['GET', 'POST', 'DELETE']
 };
