@@ -10,7 +10,6 @@ function App() {
     const [resolution, setResolution] = useState('');
     const [explanation, setExplanation] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [globalSearch, setGlobalSearch] = useState('');
 
     const {
         addNote,

@@ -20,7 +20,7 @@ export const NotesProvider = ({ children }) => {
         axios.get(`${backendUrl}/api/notes`)
             .then(response => setNotes(response.data))
             .catch(error => console.error('Error fetching notes:', error));
-    }, []);
+    });
 
     const addNote = (newNote) => {
         axios.post(`${backendUrl}/api/notes`, newNote)
