@@ -1,0 +1,9 @@
+[
+  {
+    "client": "Emergency Automotive",
+    "contact": "Lisa",
+    "issue": "Quickbooks is requiring an update",
+    "resolution": "Forced everyone out of quickbooks and started quickbooks prompting for an update",
+    "explanation": "Quickbooks will require that an update happen if it deems it to be a critical update. This will require everyone connected to quickbooks via the server to disconnect."
+  }
+]
