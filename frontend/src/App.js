@@ -10,6 +10,7 @@ function App() {
     const [resolution, setResolution] = useState('');
     const [explanation, setExplanation] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [globalSearch, setGlobalSearch] = useState('');
 
     const {
         addNote,
@@ -89,7 +90,7 @@ function App() {
                 <div className="search-container">
                     <input
                         type="text"
-                        value={globalSearch}
+                        value={searchQueries.global}
                         onChange={handleFieldChange}
                         placeholder="Global Search..."
                         name="global"

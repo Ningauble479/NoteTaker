@@ -10,7 +10,7 @@ const notesFilePath = path.join(__dirname, 'notes.json');
 
 // Configure CORS
 const corsOptions = {
-    origin: 'https://super-duper-parakeet-4w9p6vr9vpwc594-3000.app.github.dev', // Your frontend origin
+    origin: ['https://super-duper-parakeet-4w9p6vr9vpwc594-3000.app.github.dev', '*'],// Your frontend origin
     optionsSuccessStatus: 200,
     methods: ['GET', 'POST', 'DELETE']
 };
@@ -18,6 +18,10 @@ app.use(cors(corsOptions));
 
 // Parse incoming JSON requests
 app.use(express.json());
+
+// Serve static files from the React app's build folder
+const buildPath = path.join(__dirname, '..', 'frontend', 'build');
+app.use(express.static(buildPath));
 
 // Load notes
 app.get('/api/notes', (req, res) => {
@@ -72,6 +76,12 @@ app.delete('/api/notes/:index', (req, res) => {
         res.status(404).json({ error: 'No notes found' });
     }
 });
+
+// For all other routes, serve the React app
+app.get('*', (req, res) => {
+    res.sendFile(path.join(buildPath, 'index.html'));
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
