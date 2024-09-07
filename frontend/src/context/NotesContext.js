@@ -7,9 +7,8 @@ export const NotesProvider = ({ children }) => {
     const backendUrl = process.env.TEMPORARY_VERCEL_URL || process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
 
     const [notes, setNotes] = useState([]);
+    const [currentIssueName, setCurrentIssueName] = useState("")
     const [searchQueries, setSearchQueries] = useState({
-        client: '',
-        contact: '',
         issue: '',
         resolution: '',
         explanation: '',
@@ -20,7 +19,7 @@ export const NotesProvider = ({ children }) => {
         axios.get(`${backendUrl}/api/notes`)
             .then(response => setNotes(response.data))
             .catch(error => console.error('Error fetching notes:', error));
-    });
+    },[]);
 
     const addNote = (newNote) => {
         axios.post(`${backendUrl}/api/notes`, newNote)
@@ -41,10 +40,14 @@ export const NotesProvider = ({ children }) => {
         }));
     };
 
+    const currentIssue = notes.filter(note => {
+        return(
+            note.issue.toLowerCase().includes(currentIssueName.toLowerCase())
+        )
+    })
+
     const filteredNotes = notes.filter(note => {
         return (
-            note.client.toLowerCase().includes(searchQueries.client.toLowerCase()) &&
-            note.contact.toLowerCase().includes(searchQueries.contact.toLowerCase()) &&
             note.issue.toLowerCase().includes(searchQueries.issue.toLowerCase()) &&
             note.resolution.toLowerCase().includes(searchQueries.resolution.toLowerCase()) &&
             note.explanation.toLowerCase().includes(searchQueries.explanation.toLowerCase())
@@ -53,8 +56,6 @@ export const NotesProvider = ({ children }) => {
 
     const globallyFilteredNotes = filteredNotes.filter(note => {
         return(
-            note.client.toLowerCase().includes(searchQueries.global.toLowerCase()) ||
-            note.contact.toLowerCase().includes(searchQueries.global.toLowerCase()) ||
             note.issue.toLowerCase().includes(searchQueries.global.toLowerCase()) ||
             note.resolution.toLowerCase().includes(searchQueries.global.toLowerCase()) ||
             note.explanation.toLowerCase().includes(searchQueries.global.toLowerCase())
@@ -64,6 +65,8 @@ export const NotesProvider = ({ children }) => {
     return (
         <NotesContext.Provider value={{
             notes: globallyFilteredNotes,
+            currentIssue,
+            setCurrentIssueName,
             addNote,
             deleteNote,
             searchQueries,

@@ -35,13 +35,13 @@ app.get('/api/notes', (req, res) => {
 
 // Save a new note
 app.post('/api/notes', (req, res) => {
-    const { client, contact, issue, resolution, explanation } = req.body;
+    const { issue, resolution, explanation } = req.body;
 
-    if (!client || !contact || !issue || !resolution || !explanation) {
+    if (!issue || !resolution || !explanation) {
         return res.status(400).json({ error: 'All fields are required' });
     }
 
-    const newNote = { client, contact, issue, resolution, explanation };
+    const newNote = { issue, resolution, explanation };
 
     const notes = fs.existsSync(notesFilePath)
         ? JSON.parse(fs.readFileSync(notesFilePath, 'utf8'))

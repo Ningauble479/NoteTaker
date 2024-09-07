@@ -2,6 +2,9 @@
 .App {
   display: flex;
   height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
   font-family: Arial, sans-serif;
 }
 
@@ -43,6 +46,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  width: 100%;
 }
 
 /* Right side for viewing and searching notes */
@@ -118,4 +122,13 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
+}
+
+.IssuePageMain {
+  width: 75%;
+  height: 100%;
+}
+
+.search-dropdown {
+  
 }
